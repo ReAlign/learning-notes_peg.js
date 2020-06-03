@@ -1,0 +1,25 @@
+{
+  "name": "learning-notes_peg.js",
+  "version": "1.0.0",
+  "description": "Learning Notes: PEG.js",
+  "main": "index.js",
+  "scripts": {
+    "generate-check": "pegjs -o dist/css-check-parser.js peg/css-check.pegjs",
+    "generate-bean": "pegjs -o dist/java-bean-parser.js peg/java-bean.pegjs",
+    "check": "node demo/check.js",
+    "bean": "node demo/bean.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ReAlign/learning-notes_peg.js.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ReAlign/learning-notes_peg.js/issues"
+  },
+  "homepage": "https://github.com/ReAlign/learning-notes_peg.js#readme",
+  "devDependencies": {
+    "pegjs": "^0.10.0"
+  }
+}
