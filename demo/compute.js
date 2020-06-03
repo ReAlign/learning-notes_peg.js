@@ -1,5 +1,5 @@
 const hanle = require('./handle');
-const parser = require('./../dist/compute-parser');
+const parser = require('./../dist/compute-parser.min.js');
 
 hanle({
   parser,

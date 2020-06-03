@@ -16,6 +16,8 @@
     "minifier-compute": "terser dist/compute-parser.js --compress --mangle -o dist/compute-parser.min.js",
     "generate-compute": "npm run build-compute && npm run minifier-compute",
 
+    "generate": "npm run generate-check && npm run generate-bean && npm run generate-compute",
+
     "check": "node demo/check.js",
     "bean": "node demo/bean.js",
     "compute": "node demo/compute.js"
