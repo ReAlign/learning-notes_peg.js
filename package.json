@@ -4,10 +4,21 @@
   "description": "Learning Notes: PEG.js",
   "main": "index.js",
   "scripts": {
-    "generate-check": "pegjs -o dist/css-check-parser.js peg/css-check.pegjs",
-    "generate-bean": "pegjs -o dist/java-bean-parser.js peg/java-bean.pegjs",
+    "build-check": "pegjs -o dist/css-check-parser.js peg/css-check.pegjs",
+    "minifier-check": "terser dist/css-check-parser.js --compress --mangle -o dist/css-check-parser.min.js",
+    "generate-check": "npm run build-check && npm run minifier-check",
+
+    "build-bean": "pegjs -o dist/java-bean-parser.js peg/java-bean.pegjs",
+    "minifier-bean": "terser dist/java-bean-parser.js --compress --mangle -o dist/java-bean-parser.min.js",
+    "generate-bean": "npm run build-bean && npm run minifier-bean",
+
+    "build-compute": "pegjs -o dist/compute-parser.js peg/compute.pegjs",
+    "minifier-compute": "terser dist/compute-parser.js --compress --mangle -o dist/compute-parser.min.js",
+    "generate-compute": "npm run build-compute && npm run minifier-compute",
+
     "check": "node demo/check.js",
-    "bean": "node demo/bean.js"
+    "bean": "node demo/bean.js",
+    "compute": "node demo/compute.js"
   },
   "repository": {
     "type": "git",
@@ -20,6 +31,9 @@
   },
   "homepage": "https://github.com/ReAlign/learning-notes_peg.js#readme",
   "devDependencies": {
-    "pegjs": "^0.10.0"
+    "minifier": "^0.8.1",
+    "pegjs": "^0.10.0",
+    "terser": "^4.7.0",
+    "uglify-js": "^3.9.4"
   }
 }

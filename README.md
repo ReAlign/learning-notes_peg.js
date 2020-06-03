@@ -10,3 +10,4 @@
 * [pegjs学习的小例子](https://www.jianshu.com/p/4354dd8d19f7)
 * [PEG.js 介绍与基础使用](https://zhuanlan.zhihu.com/p/49833910)
 * [huntbao/jsonbean](https://github.com/huntbao/jsonbean)
+* [[Node.js] PEGjs](https://www.jianshu.com/p/e280a1a756fb)

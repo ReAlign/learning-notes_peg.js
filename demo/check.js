@@ -1,21 +1,8 @@
-const fs = require('fs');
-const Parser = require('./../dist/css-check-parser');
+const hanle = require('./handle');
+const parser = require('./../dist/css-check-parser.min.js');
 
-fs.readFile(`${__dirname}/check.css`, 'utf-8', (err, data) => {
-    if (err) {
-        console.log(err);
-    } else {
-        try {
-            const obj = Parser.parse(data);
-            console.log(obj);
-            const objStr = JSON.stringify(obj, null, 2);
-            fs.writeFile(`${__dirname}/check.json`, objStr, (err) => {
-                if (err) {
-                    console.log(err);
-                }
-            })
-        } catch (e) {
-            console.log(e);
-        }
-    }
-})
+hanle({
+  parser,
+  p1: `${__dirname}/check.css`,
+  p2: `${__dirname}/check.json`
+});

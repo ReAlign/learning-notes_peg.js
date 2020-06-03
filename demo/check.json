@@ -1,13 +1,19 @@
-[
-  [
-    [ [], [] ],
-    "margin-top",
-    [],
-    ":",
-    [],
-    "72px",
-    [],
-    ";",
-    [ [], [] ]
-  ]
-]
+{
+  "result": {
+    "selector": "g-inject-app",
+    "items": [
+      {
+        "property": "margin-top",
+        "value": "72px"
+      },
+      {
+        "property": "margin-bottom",
+        "value": "12px"
+      },
+      {
+        "property": "background",
+        "value": "red"
+      }
+    ]
+  }
+}

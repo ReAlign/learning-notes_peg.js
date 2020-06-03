@@ -1,27 +1,29 @@
 {
-  "name": "AftersaleReasonVO",
-  "description": "",
-  "attributes": [
-    {
-      "name": "reasonId",
-      "typeName": "Long",
-      "isArray": false,
-      "defaultValue": "",
-      "description": ""
-    },
-    {
-      "name": "reasonShow",
-      "typeName": "String",
-      "isArray": false,
-      "defaultValue": "",
-      "description": ""
-    },
-    {
-      "name": "descriptionLabelList",
-      "typeName": "AfsLabelDTO",
-      "isArray": true,
-      "defaultValue": "",
-      "description": ""
-    }
-  ]
+  "result": {
+    "name": "AftersaleReasonVO",
+    "description": "",
+    "attributes": [
+      {
+        "name": "reasonId",
+        "typeName": "Long",
+        "isArray": false,
+        "defaultValue": "",
+        "description": ""
+      },
+      {
+        "name": "reasonShow",
+        "typeName": "String",
+        "isArray": false,
+        "defaultValue": "",
+        "description": ""
+      },
+      {
+        "name": "descriptionLabelList",
+        "typeName": "AfsLabelDTO",
+        "isArray": true,
+        "defaultValue": "",
+        "description": ""
+      }
+    ]
+  }
 }
