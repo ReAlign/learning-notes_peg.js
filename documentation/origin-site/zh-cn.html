@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="Futago-za Ryuu (futagoza.ryuu@gmail.com)">
+  <meta name="copyright" content="Copyright &copy; 2017 Futago-za Ryuu">
+  <meta name="keywords" content="parser generator, PEG, JavaScript">
+  <meta name="description"
+    content="PEG.js is a parser generator for JavaScript based on the parsing expression grammar formalism.">
+  <title>Documentation &raquo; PEG.js &ndash; Parser Generator for JavaScript</title>
+  <link rel="stylesheet" href="./css/common.css">
+  <link rel="stylesheet" href="./css/layout-default.css">
+  <link rel="stylesheet" href="./css/content.css">
+  <link rel="shortcut icon"
+    href="https://public-bucket-realign.nos-eastchina1.126.net/image/normal/2020-06-04/img-1591281835472-7962.png"
+    type="image/x-icon">
+  <!--[if IE]>
+    <script>
+        var html5elements = ["aside", "footer", "header", "nav"];
+        for (var i = 0; i < html5elements.length; i++) {
+          document.createElement(html5elements[i]);
+        }
+    </script>
+    <![endif]-->
+
+</head>
+
+<body>
+  <div id="main">
+    <header id="header">
+      <h1><a href="/">
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">PEG.js</font></font></font>
+          </font>
+        </a></h1>
+      <h2>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">JavaScript解析器生成器</font></font></font>
+        </font>
+      </h2>
+    </header>
+
+    <nav id="menu">
+      <a href="/">
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">主页</font></font></font>
+        </font>
+      </a>
+      <font style="vertical-align: inherit;"><a href="/online"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">在线版本</font></font></font></a><a class="current" href="/documentation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">文档</font></font></font></a><a href="/development"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">开发</font></font></font></a></font><a href="/online">
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font>
+        </font>
+      </a>
+      <a class="current" href="/documentation">
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font>
+        </font>
+      </a>
+      <a href="/development">
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font>
+        </font>
+      </a>
+    </nav>
+
+    <div id="content">
+
+      <h1>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">文献资料</font></font></font>
+        </font>
+      </h1>
+
+      <h2 id="table-of-contents">
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">目录</font></font></font>
+        </font>
+      </h2>
+
+      <ul>
+        <li>
+          <a href="#installation">
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">安装</font></font></font>
+            </font>
+          </a>
+          <ul>
+            <li><a href="#installation-node-js">
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Node.js</font></font></font>
+                </font>
+              </a></li>
+            <li><a href="#installation-browser">
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">浏览器</font></font></font>
+                </font>
+              </a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#generating-a-parser">
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">生成解析器</font></font></font>
+            </font>
+          </a>
+          <ul>
+            <li><a href="#generating-a-parser-command-line">
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">命令行</font></font></font>
+                </font>
+              </a></li>
+            <li><a href="#generating-a-parser-javascript-api">
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">JavaScript API</font></font></font>
+                </font>
+              </a></li>
+          </ul>
+        </li>
+        <li><a href="#using-the-parser">
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">使用解析器</font></font></font>
+            </font>
+          </a></li>
+        <li>
+          <a href="#grammar-syntax-and-semantics">
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">语法和语义</font></font></font>
+            </font>
+          </a>
+          <ul>
+            <li><a href="#grammar-syntax-and-semantics-parsing-expression-types">
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">解析表达式类型</font></font></font>
+                </font>
+              </a></li>
+          </ul>
+        </li>
+        <li><a href="#compatibility">
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">兼容性</font></font></font>
+            </font>
+          </a></li>
+      </ul>
+
+      <h2 id="installation">
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">安装</font></font></font>
+        </font>
+      </h2>
+
+      <h3 id="installation-node-js">
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Node.js</font></font></font>
+        </font>
+      </h3>
+
+      <p>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">要使用该</font></font></font>
+        </font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">命令，请分为安装PEG.js：</font></font></font></font><code>pegjs</code>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font>
+        </font>
+      </p>
+
+      <pre><code>$ npm install -g pegjs</code></pre>
+
+      <p>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">要使用JavaScript API，请在本地安装PEG.js：</font></font></font>
+        </font>
+      </p>
+
+      <pre><code>$ npm install pegjs</code></pre>
+
+      <p>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">如果同时需要</font></font></font>
+        </font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">命令和JavaScript API，请同时安装PEG.js。</font></font></font></font><code>pegjs</code>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font>
+        </font>
+      </p>
+
+      <h3 id="installation-browser">
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">浏览器</font></font></font>
+        </font>
+      </h3>
+
+      <p><a href="https://pegjs.org/#download">
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">下载</font></font></font>
+          </font>
+        </a>
+        <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> PEG.js库（常规或缩小版本）或使用Bower安装它：</font></font></font></font><font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font>
+        </font>
+      </p>
+
+      <pre><code>$ bower install pegjs</code></pre>
+
+      <h2 id="generating-a-parser">
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">生成解析器</font></font></font>
+        </font>
+      </h2>
+
+      <p>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">PEG.js从描述预期输入的语法生成解析器，并可以指定解析器返回的内容（对输入的匹配部分使用语义操作）。</font></font></font>
+          <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">生成的解析器本身是带有简单API的JavaScript对象。</font></font></font>
+        </font>
+      </p>
+
+      <h3 id="generating-a-parser-command-line">
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">命令行</font></font></font>
+        </font>
+      </h3>
+
+      <p>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">要从语法生成解析器，请使用以下</font></font></font>
+        </font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            命令：</font></font></font></font><code>pegjs</code>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font>
+        </font>
+      </p>
+
+      <pre><code>$ pegjs arithmetics.pegjs</code></pre>
+
+      <p>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">这重组解析器源代码写入与语法文件同名但扩展名为“ .js”的文件中。</font></font></font>
+          <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">您还可以显式指定输出文件：</font></font></font>
+        </font>
+      </p>
+
+      <pre><code>$ pegjs -o arithmetics-parser.js arithmetics.pegjs</code></pre>
+
+      <p>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">如果省略输入和输出文件，则使用标准输入和输出。</font></font></font>
+        </font>
+      </p>
+
+      <p>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">默认情况下，生成的解析器为Node.js模块格式。</font></font></font>
+          <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">您可以使用</font></font></font>
+        </font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">选项</font></font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">覆盖它</font></font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">。</font></font></font></font><code>--format</code>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font>
+          <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font>
+          <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font>
+        </font>
+      </p>
+
+      <p>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">您可以使用以下几个选项来调整生成的解析器：</font></font></font>
+        </font>
+      </p>
+
+      <dl>
+        <dt><code>--allowed-start-rules</code></dt>
+        <dd>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">逗号分隔的规则列表，将允许解析器从中开始解析（替代值：语法中的第一条规则）。</font></font></font>
+          </font>
+        </dd>
+
+        <dt><code>--cache</code></dt>
+        <dd>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">生成解析器缓存结果，避免在病理情况下避免指数解析时间，但减小解析器变慢。</font></font></font>
+          </font>
+        </dd>
+
+        <dt><code>--dependency</code></dt>
+        <dd>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">使解析器需要指定的依赖项（可以多次指定）。</font></font></font>
+          </font>
+        </dd>
+
+        <dt><code>--export-var</code></dt>
+        <dd>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">当未检测到模块加载器时，将解析器对象分配到的变量变量的名称。</font></font></font>
+          </font>
+        </dd>
+
+        <dt><code>--extra-options</code></dt>
+        <dd>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">传递给的其他选项（JSON格式）
+             </font></font></font>
+          </font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">。</font></font></font></font><code>peg.generate</code>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font>
+          </font>
+        </dd>
+
+        <dt><code>--extra-options-file</code></dt>
+        <dd>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">带有其他选项的文件（JSON格式），以传递给
+             </font></font></font>
+          </font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">。</font></font></font></font><code>peg.generate</code>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font>
+          </font>
+        </dd>
+
+        <dt><code>--format</code></dt>
+        <dd>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">生成的解析器的格式为</font></font></font>
+          </font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">：</font></font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">，
+             </font></font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">， ，</font></font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">（默认</font></font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">： ）。</font></font></font></font><code>amd</code>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font>
+          </font><code>commonjs</code>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font>
+          </font><code>globals</code>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font>
+          </font><code>umd</code>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font>
+          </font><code>commonjs</code>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font>
+          </font>
+        </dd>
+
+        <dt><code>--optimize</code></dt>
+        <dd>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">优化生成的解析器，用于解析速度（之间选择</font></font></font>
+          </font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">）或代码大小（</font></font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">）（默认值：
+             </font></font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">）</font></font></font></font><code>speed</code>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font>
+          </font><code>size</code>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font>
+          </font><code>speed</code>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font>
+          </font>
+        </dd>
+
+        <dt><code>--plugin</code></dt>
+        <dd>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">使PEG.js使用指定的插件（可以多次指定）。</font></font></font>
+          </font>
+        </dd>
+
+        <dt><code>--trace</code></dt>
+        <dd>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">使解析器跟踪其进度。</font></font></font>
+          </font>
+        </dd>
+      </dl>
+
+      <h3 id="generating-a-parser-javascript-api">
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">JavaScript API</font></font></font>
+        </font>
+      </h3>
+
+      <p>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">在Node.js中，需要PEG.js解析器生成器模块：</font></font></font>
+        </font>
+      </p>
+
+      <pre><code>var peg = require("pegjs");</code></pre>
+
+      <p>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">在浏览器中，使用</font></font></font>
+        </font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">标签</font></font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">在您的|网页或应用程序中所有游戏PEG.js库</font></font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">。</font></font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">如果PEG.js检测到AMD加载程序，它将定义自己为模块，否则API在将</font></font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">全局对象中</font></font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">可用
+           </font></font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">。</font></font></font></font><code>&lt;script&gt;</code>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font>
+          <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font>
+          <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font>
+          <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font>
+        </font><code>peg</code>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font>
+          <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font>
+          <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font>
+        </font>
+      </p>
+
+      <p>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">要生成解析器，请调用</font></font></font>
+        </font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">方法结合语法作为参数传递：</font></font></font></font><code>peg.generate</code>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font>
+        </font>
+      </p>
+
+      <pre><code>var parser = peg.generate("start = ('a' / 'b')+");</code></pre>
+
+      <p>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">该方法将以字符串形式返回生成的解析器对象其他源代码（选择</font></font></font>
+        </font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">选项</font></font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">的值，</font></font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">请参见上方）。</font></font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">如果语法无效，则引发异常。</font></font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">该异常将包含
+           </font></font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">具有相关该错误的更多详细信息的属性。</font></font></font></font><code>output</code>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font>
+          <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font>
+          <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font>
+          <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font>
+          <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font>
+        </font><code>message</code>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font>
+        </font>
+      </p>
+
+      <p>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">您可以通过将带有选项对象的第二个参数传递给来调整生成的解析器</font></font></font>
+        </font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">。</font></font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">支持以下选项：</font></font></font></font><code>peg.generate</code>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font>
+          <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font>
+        </font>
+      </p>
+
+      <dl>
+        <dt><code>allowedStartRules</code></dt>
+        <dd>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">允许解析器开始解析的规则（最小值：语法中的第一条规则）。</font></font></font>
+          </font>
+        </dd>
+
+        <dt><code>cache</code></dt>
+        <dd>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">如果为</font></font></font>
+          </font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">，则使解析器缓存结果，避免了在病理情况下的索引解析时间，但使解析器变慢了（或值：）
+             </font></font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">。</font></font></font></font><code>true</code>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font>
+          </font><code>false</code>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font>
+          </font>
+        </dd>
+
+        <dt><code>dependencies</code></dt>
+        <dd>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">解析器依赖项，该值是一个对象，该对象将用于访问解析器中的依赖项的变量映射到用于加载其模块ID；仅</font></font></font>
+            <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">当有效</font></font></font>
+          </font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">设置为</font></font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">，
+             </font></font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">或者</font></font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">（
+             </font></font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">可选：）</font></font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">。</font></font></font></font><code>format</code>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font>
+          </font><code>"amd"</code>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font>
+          </font><code>"commonjs"</code>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font>
+          </font><code>"umd"</code>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font>
+          </font><code>{}</code>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font>
+          </font>
+        </dd>
+
+        <dt><code>exportVar</code></dt>
+        <dd>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">未检测到模块加载器时将解析器对象分配到的变量变量的名称；仅</font></font></font>
+            <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">当</font></font></font>
+          </font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">设置为
+             </font></font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">或</font></font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">时有效</font></font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">（默认值：）
+             </font></font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">。</font></font></font></font><code>format</code>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font>
+          </font><code>"globals"</code>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font>
+            <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font>
+          </font><code>"umd"</code>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font>
+          </font><code>null</code>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font>
+          </font>
+        </dd>
+
+        <dt><code>format</code></dt>
+        <dd><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">所生成的分析器的格式化（</font></font><code>"amd"</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">，</font></font><code>"bare"</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">，
+           </font></font><code>"commonjs"</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">，</font></font><code>"globals"</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">，或</font></font><code>"umd"</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">）; </font><font style="vertical-align: inherit;">仅当</font></font><code>output</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">设置</font><font style="vertical-align: inherit;">为时有效</font></font><code>"source"</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">（默认值：）
+           </font></font><code>"bare"</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">。</font></font></dd>
+
+        <dt><code>optimize</code></dt>
+        <dd><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">在优化生成的解析器以解析速度（</font></font><code>"speed"</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">）或代码大小（</font></font><code>"size"</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">）之间进行选择（默认值：）
+           </font></font><code>"speed"</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">。</font></font></dd>
+
+        <dt><code>output</code></dt>
+        <dd><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">如果设置为</font></font><code>"parser"</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">，则该方法将返回生成的解析器对象；否则为false。</font><font style="vertical-align: inherit;">如果设置为</font></font><opde><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">“源”，它将以字符串形式返回解析器源代码（默认值：）</font></font><code>"parser"</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">。</font></font></opde>
+        </dd>
+
+        <dt><code>plugins</code></dt>
+        <dd><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">要使用的插件。</font></font></dd>
+
+        <dt><code>trace</code></dt>
+        <dd><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">使解析器跟踪其进度（默认值：）</font></font><code>false</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">。</font></font></dd>
+      </dl>
+
+      <h2 id="using-the-parser"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">使用解析器</font></font></h2>
+
+      <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">使用生成的解析器很简单-只需调用其</font></font><code>parse</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        方法并传递输入字符串作为参数即可。</font><font style="vertical-align: inherit;">该方法将返回解析结果（确切值取决于用于生成解析器的语法），或者如果输入无效，则引发异常。</font><font style="vertical-align: inherit;">异常将包含
+         </font></font><code>location</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">，</font><font style="vertical-align: inherit;">和</font><font style="vertical-align: inherit;">属性</font></font><code>expected</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">，</font></font><code>found</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">以及
+         </font></font><code>message</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">有关该错误的更多详细信息。</font></font></p>
+
+      <pre><code>parser.parse("abba"); // returns ["a", "b", "b", "a"]<font></font>
+<font></font>
+parser.parse("abcd"); // throws an exception </code></pre>
+
+      <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">您可以通过将带有选项对象的第二个参数传递给</font></font><code>parse</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">方法</font><font style="vertical-align: inherit;">来调整解析器的行为</font><font style="vertical-align: inherit;">。</font><font style="vertical-align: inherit;">支持以下选项：</font></font></p>
+
+      <dl>
+        <dt><code>startRule</code></dt>
+        <dd><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">从中开始解析的规则的名称。</font></font></dd>
+
+        <dt><code>tracer</code></dt>
+        <dd><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">使用示踪剂。</font></font></dd>
+      </dl>
+
+      <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">解析器还可以支持自己的自定义选项。</font></font></p>
+
+      <h2 id="grammar-syntax-and-semantics"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">语法和语义</font></font></h2>
+
+      <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">语法与JavaScript相似，因为它不是面向行的，并且会忽略标记之间的空格。</font><font style="vertical-align: inherit;">您还可以使用JavaScript样式的注释（</font></font><code>// ...</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">和</font></font><code>/* ... */</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">）。</font></font></p>
+
+      <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">让我们看一下可识别简单算术表达式（如）的示例语法</font></font><code>2*(3+4)</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">。</font><font style="vertical-align: inherit;">根据此语法生成的解析器将计算其值。</font></font></p>
+
+      <pre><code>start<font></font>
+= additive<font></font>
+<font></font>
+additive<font></font>
+= left:multiplicative "+" right:additive { return left + right; }<font></font>
+/ multiplicative<font></font>
+<font></font>
+multiplicative<font></font>
+= left:primary "*" right:multiplicative { return left * right; }<font></font>
+/ primary<font></font>
+<font></font>
+primary<font></font>
+= integer<font></font>
+/ "(" additive:additive ")" { return additive; }<font></font>
+<font></font>
+integer "integer"<font></font>
+= digits:[0-9]+ { return parseInt(digits.join(""), 10); }</code></pre>
+
+      <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">在顶层，语法由</font></font><em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">规则</font></font></em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">组成</font><font style="vertical-align: inherit;">（在我们的示例中，</font><em><font style="vertical-align: inherit;">规则</font></em><font style="vertical-align: inherit;">有五个）。</font><font style="vertical-align: inherit;">每个规则都有一个</font><font style="vertical-align: inherit;">标识该规则</font><font style="vertical-align: inherit;">的</font></font><em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">名称</font></font></em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">（例如
+         </font></font><code>integer</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">）和一个</font></font><em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">解析表达式</font></font></em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">（例如</font></font><code>digits:[0-9]+ { return parseInt(digits.join(""),
+          10); }</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">），</font><font style="vertical-align: inherit;">该</font><em><font style="vertical-align: inherit;">解析表达式</font></em><font style="vertical-align: inherit;">定义一个模式以与输入文本进行匹配，并且可能包含一些JavaScript代码，这些代码确定模式成功匹配后会发生什么。</font><font style="vertical-align: inherit;">规则还可以包含</font><font style="vertical-align: inherit;">错误消息中使用</font></font><em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">的易于</font></font></em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">理解的</font><em><font style="vertical-align: inherit;">名称</font></em><font style="vertical-align: inherit;">（在我们的示例中，只有</font></font><code>integer</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">规则具有</font><em><font style="vertical-align: inherit;">易于</font></em><font style="vertical-align: inherit;">理解的
+         </font><font style="vertical-align: inherit;">名称）。</font><font style="vertical-align: inherit;">解析从第一个规则（也称为</font></font><em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">开始规则）开始</font></font></em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">。</font></font></p>
+
+      <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">规则名称必须是JavaScript标识符。</font><font style="vertical-align: inherit;">后面跟一个等号（“ =”）和一个解析表达式。</font><font style="vertical-align: inherit;">如果规则具有易于理解的名称，那么它将作为JavaScript字符串写在名称和分隔的等号之间。</font><font style="vertical-align: inherit;">规则仅需用空格分隔（它们的开头很容易辨认），但在解析表达式之后可以使用分号（“;”）。</font></font></p>
+
+      <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">第一个规则可以带有一个</font></font><em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">初始化程序</font></font></em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">，即一段大括号（“ {”和“}”）中的JavaScript代码。</font><font style="vertical-align: inherit;">在生成的解析器开始解析之前，将执行此代码。</font><font style="vertical-align: inherit;">可以在规则操作和语义谓词中访问初始化程序中定义的所有变量和函数。</font><font style="vertical-align: inherit;">初始化器中的代码可以使用</font></font><code>options</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">变量</font><font style="vertical-align: inherit;">访问传递给解析器的选项
+         </font><font style="vertical-align: inherit;">。</font><font style="vertical-align: inherit;">初始化代码中的花括号必须保持平衡。</font><font style="vertical-align: inherit;">让我们使用简单的初始化程序从上方看示例语法。</font></font></p>
+
+      <pre><code>{<font></font>
+function makeInteger(o) {<font></font>
+return parseInt(o.join(""), 10);<font></font>
+}<font></font>
+}<font></font>
+<font></font>
+start<font></font>
+= additive<font></font>
+<font></font>
+additive<font></font>
+= left:multiplicative "+" right:additive { return left + right; }<font></font>
+/ multiplicative<font></font>
+<font></font>
+multiplicative<font></font>
+= left:primary "*" right:multiplicative { return left * right; }<font></font>
+/ primary<font></font>
+<font></font>
+primary<font></font>
+= integer<font></font>
+/ "(" additive:additive ")" { return additive; }<font></font>
+<font></font>
+integer "integer"<font></font>
+= digits:[0-9]+ { return makeInteger(digits); }</code></pre>
+
+      <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">规则的解析表达式用于将输入文本与语法进行匹配。</font><font style="vertical-align: inherit;">表达式有多种类型-匹配的字符或字符类，指示可选部分和重复等。表达式还可以包含对其他规则的引用。</font><font style="vertical-align: inherit;">请参阅</font></font><a href="#grammar-syntax-and-semantics-parsing-expression-types"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">下面的详细说明</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">。</font></font></p>
+
+      <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">如果表达式在运行生成的解析器时成功匹配文本的一部分，则将生成</font></font><em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">匹配结果</font></font></em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">，这是一个JavaScript值。</font><font style="vertical-align: inherit;">例如：</font></font></p>
+
+      <ul>
+        <li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">与文字字符串匹配的表达式会生成包含匹配文本的JavaScript字符串。</font></font></li>
+
+        <li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">与某个子表达式的重复出现匹配的表达式将生成具有所有匹配项的JavaScript数组。</font></font></li>
+      </ul>
+
+      <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">在表达式中使用规则名称时，匹配结果会通过规则传播，直到起始规则为止。</font><font style="vertical-align: inherit;">解析成功后，生成的解析器将返回起始规则的匹配结果。</font></font></p>
+
+      <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">解析器表达式的一种特殊情况是</font></font><em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">解析器动作</font></font></em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> -大括号（“ {”和“}”）中的一段JavaScript代码，该字符串获取前面某些表达式的匹配结果并返回JavaScript值。</font><font style="vertical-align: inherit;">该值被认为是前一个表达式的匹配结果（换句话说，解析器操作是匹配结果转换器）。</font></font></p>
+
+      <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">在我们的算术示例中，有许多解析器动作。</font><font style="vertical-align: inherit;">考虑表达中的动作</font></font><code>digits:[0-9]+ { return parseInt(digits.join(""), 10);
+          }</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">。</font><font style="vertical-align: inherit;">它以表达式[0-9] +的匹配结果作为参数，该结果是一个包含数字的字符串数组。</font><font style="vertical-align: inherit;">它将数字连接在一起以形成数字，并将其转换为JavaScript </font></font><code>number</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">对象。</font></font></p>
+
+      <h3 id="grammar-syntax-and-semantics-parsing-expression-types"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">解析表达式类型</font></font></h3>
+
+      <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">解析表达式有几种类型，其中一些包含子表达式，因此形成递归结构：</font></font></p>
+
+      <dl>
+        <dt><code>"<em>literal</em>"<br>'<em>literal</em>'</code></dt>
+
+        <dd>
+          <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">匹配确切的文字字符串并返回。</font><font style="vertical-align: inherit;">字符串语法与JavaScript中的相同。</font><font style="vertical-align: inherit;">追加</font></font><code>i</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">字面使得比赛不区分大小写之后。</font></font></p>
+        </dd>
+
+        <dt><code>.</code></dt>
+
+        <dd>
+          <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">精确匹配一个字符并将其作为字符串返回。</font></font></p>
+        </dd>
+
+        <dt><code>[<em>characters</em>]</code></dt>
+
+        <dd>
+          <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">匹配一组字符，并将其作为字符串返回。</font><font style="vertical-align: inherit;">可以使用与JavaScript字符串完全相同的方式对列表中的字符进行转义。</font><font style="vertical-align: inherit;">字符列表还可以包含范围（例如，</font></font><code>[a-z]</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            表示“所有小写字母”）。</font><font style="vertical-align: inherit;">在字符前面加上</font></font><code>^</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            反转</font><font style="vertical-align: inherit;">的字符</font><font style="vertical-align: inherit;">集（例如，</font></font><code>[^a-z]</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">表示“除小写字母外的所有字符”）。</font><font style="vertical-align: inherit;">追加</font></font><code>i</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">字面使得比赛不区分大小写之后。</font></font></p>
+        </dd>
+
+        <dt><code><em>rule</em></code></dt>
+
+        <dd>
+          <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">递归匹配规则的解析表达式，并返回其匹配结果。</font></font></p>
+        </dd>
+
+        <dt><code>( <em>expression</em> )</code></dt>
+
+        <dd>
+          <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">匹配子表达式并返回其匹配结果。</font></font></p>
+        </dd>
+
+        <dt><code><em>expression</em> *</code></dt>
+
+        <dd>
+          <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">匹配表达式的零个或多个重复，并在数组中返回其匹配结果。</font><font style="vertical-align: inherit;">匹配是贪婪的，即解析器尝试尽可能多地匹配表达式。</font><font style="vertical-align: inherit;">与正则表达式不同，没有回溯。</font></font></p>
+        </dd>
+
+        <dt><code><em>expression</em> +</code></dt>
+
+        <dd>
+          <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">匹配表达式的一个或多个重复，然后将其匹配结果返回到数组中。</font><font style="vertical-align: inherit;">匹配是贪婪的，即解析器尝试尽可能多地匹配表达式。</font><font style="vertical-align: inherit;">与正则表达式不同，没有回溯。</font></font></p>
+        </dd>
+
+        <dt><code><em>expression</em> ?</code></dt>
+
+        <dd>
+          <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">尝试匹配表达式。</font><font style="vertical-align: inherit;">如果匹配成功，则返回其匹配结果，否则返回</font></font><code>null</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">。</font><font style="vertical-align: inherit;">与正则表达式不同，没有回溯。</font></font></p>
+        </dd>
+
+        <dt><code>&amp; <em>expression</em></code></dt>
+
+        <dd>
+          <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">尝试匹配表达式。</font><font style="vertical-align: inherit;">如果匹配成功，则返回
+             </font></font><code>undefined</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">并且不消耗任何输入，否则认为匹配失败。</font></font></p>
+        </dd>
+
+        <dt><code>! <em>expression</em></code></dt>
+
+        <dd>
+          <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">尝试匹配表达式。</font><font style="vertical-align: inherit;">如果</font></font><code>undefined</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">匹配失败，则</font><font style="vertical-align: inherit;">返回
+             </font><font style="vertical-align: inherit;">并且不消耗任何输入，否则认为匹配失败。</font></font></p>
+        </dd>
+
+        <dt><code>&amp; { <em>predicate</em> }</code></dt>
+
+        <dd>
+          <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">谓词是一段JavaScript代码，就像在函数内部一样执行。</font><font style="vertical-align: inherit;">它获取前一个表达式中带标签的表达式的匹配结果作为其参数。</font><font style="vertical-align: inherit;">它应该使用该</font></font><code>return</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">语句</font><font style="vertical-align: inherit;">返回一些JavaScript值</font><font style="vertical-align: inherit;">。</font><font style="vertical-align: inherit;">如果返回的值</font></font><code>true</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">在布尔上下文中</font><font style="vertical-align: inherit;">求值为</font><font style="vertical-align: inherit;">，则只返回</font></font><code>undefined</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">而不消耗任何输入；否则</font><font style="vertical-align: inherit;">，返回0
+             </font><font style="vertical-align: inherit;">。</font><font style="vertical-align: inherit;">否则认为比赛失败。</font></font></p>
+
+          <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">谓词中的代码可以访问语法开头在初始化程序中定义的所有变量和函数。</font></font></p>
+
+          <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">谓词内部的代码也可以使用该</font></font><code>location</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">功能</font><font style="vertical-align: inherit;">访问位置信息</font><font style="vertical-align: inherit;">。</font><font style="vertical-align: inherit;">它返回这样的对象：</font></font></p>
+
+          <pre><code>{<font></font>
+start: { offset: 23, line: 5, column: 6 },<font></font>
+end:   { offset: 23, line: 5, column: 6 }<font></font>
+}</code></pre>
+
+          <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">的</font></font><code>start</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">和</font></font><code>end</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">特性都指当前的分析位置。</font><font style="vertical-align: inherit;">该</font></font><code>offset</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">属性包含偏移量作为从零开始的索引，</font></font><code>line</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">而</font></font><code>column</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            属性包含行和列作为从一开始的索引。</font></font></p>
+
+          <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">谓词中的代码还可以使用</font></font><code>options</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">变量</font><font style="vertical-align: inherit;">访问传递给解析器的选项</font><font style="vertical-align: inherit;">。</font></font></p>
+
+          <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">请注意，谓词代码中的花括号必须保持平衡。</font></font></p>
+        </dd>
+
+        <dt><code>! { <em>predicate</em> }</code></dt>
+
+        <dd>
+          <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">谓词是一段JavaScript代码，就像在函数内部一样执行。</font><font style="vertical-align: inherit;">它获取前一个表达式中带标签的表达式的匹配结果作为其参数。</font><font style="vertical-align: inherit;">它应该使用该</font></font><code>return</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">语句</font><font style="vertical-align: inherit;">返回一些JavaScript值</font><font style="vertical-align: inherit;">。</font><font style="vertical-align: inherit;">如果返回的值</font></font><code>false</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">在布尔上下文中</font><font style="vertical-align: inherit;">求值为</font><font style="vertical-align: inherit;">，则只返回</font></font><code>undefined</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">而不消耗任何输入；否则</font><font style="vertical-align: inherit;">，返回0
+             </font><font style="vertical-align: inherit;">。</font><font style="vertical-align: inherit;">否则认为比赛失败。</font></font></p>
+
+          <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">谓词中的代码可以访问语法开头在初始化程序中定义的所有变量和函数。</font></font></p>
+
+          <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">谓词内部的代码也可以使用该</font></font><code>location</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">功能</font><font style="vertical-align: inherit;">访问位置信息</font><font style="vertical-align: inherit;">。</font><font style="vertical-align: inherit;">它返回这样的对象：</font></font></p>
+
+          <pre><code>{<font></font>
+start: { offset: 23, line: 5, column: 6 },<font></font>
+end:   { offset: 23, line: 5, column: 6 }<font></font>
+}</code></pre>
+
+          <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">的</font></font><code>start</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">和</font></font><code>end</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">特性都指当前的分析位置。</font><font style="vertical-align: inherit;">该</font></font><code>offset</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">属性包含偏移量作为从零开始的索引，</font></font><code>line</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">而</font></font><code>column</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            属性包含行和列作为从一开始的索引。</font></font></p>
+
+          <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">谓词中的代码还可以使用</font></font><code>options</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">变量</font><font style="vertical-align: inherit;">访问传递给解析器的选项</font><font style="vertical-align: inherit;">。</font></font></p>
+
+          <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">请注意，谓词代码中的花括号必须保持平衡。</font></font></p>
+        </dd>
+
+        <dt><code>$ <em>expression</em></code></dt>
+
+        <dd>
+          <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">尝试匹配表达式。</font><font style="vertical-align: inherit;">如果匹配成功，则返回匹配的文本而不是匹配结果。</font></font></p>
+        </dd>
+
+        <dt><code><em>label</em> : <em>expression</em></code></dt>
+
+        <dd>
+          <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">匹配表达式并记住给定标签下的匹配结果。</font><font style="vertical-align: inherit;">标签必须是JavaScript标识符。</font></font></p>
+
+          <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">带标签的表达式与动作一起使用时，可以通过动作的JavaScript代码访问保存的匹配结果。</font></font></p>
+        </dd>
+
+        <dt><code><em>expression<sub>1</sub></em> <em>expression<sub>2</sub></em> ...
+            <em>expression<sub>n</sub></em></code></dt>
+
+        <dd>
+          <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">匹配一系列表达式，然后将它们的匹配结果返回到数组中。</font></font></p>
+        </dd>
+
+        <dt><code><em>expression</em> { <em>action</em> }</code></dt>
+
+        <dd>
+          <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">匹配表达式。</font><font style="vertical-align: inherit;">如果匹配成功，请执行操作，否则认为匹配失败。</font></font></p>
+
+          <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">该动作是一段JavaScript代码，就像在函数内部一样执行。</font><font style="vertical-align: inherit;">它获取前一个表达式中带标签的表达式的匹配结果作为其参数。</font><font style="vertical-align: inherit;">该操作应使用该</font></font><code>return</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">语句</font><font style="vertical-align: inherit;">返回一些JavaScript值</font><font style="vertical-align: inherit;">。</font><font style="vertical-align: inherit;">该值被认为是前面表达式的匹配结果。</font></font></p>
+
+          <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">为了指示错误，动作中的代码可以调用该
+             </font></font><code>expected</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">函数，这使解析器引发异常。</font><font style="vertical-align: inherit;">该函数有两个参数-当前位置的期望描述和可选的位置信息（默认为
+             </font></font><code>location</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">返回的信息-参见下文）。</font><font style="vertical-align: inherit;">该描述将用作引发异常消息的一部分。</font></font></p>
+
+          <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">动作中的代码也可以调用该</font></font><code>error</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            函数，这也使解析器抛出异常。</font><font style="vertical-align: inherit;">该函数具有两个参数-错误消息和可选的位置信息（默认为</font></font><code>location</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">返回的信息-参见下文）。</font><font style="vertical-align: inherit;">该消息将由抛出的异常使用。</font></font></p>
+
+          <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">操作内部的代码可以访问语法开头在初始化程序中定义的所有变量和函数。</font><font style="vertical-align: inherit;">操作代码中的花括号必须保持平衡。</font></font></p>
+
+          <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">动作中的代码也可以使用</font></font><code>text</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">函数</font><font style="vertical-align: inherit;">访问表达式匹配的文本</font><font style="vertical-align: inherit;">。</font></font></p>
+
+          <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">动作中的代码也可以使用</font></font><code>location</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">函数</font><font style="vertical-align: inherit;">访问位置信息
+             </font><font style="vertical-align: inherit;">。</font><font style="vertical-align: inherit;">它返回这样的对象：</font></font></p>
+
+          <pre><code>{<font></font>
+start: { offset: 23, line: 5, column: 6 },<font></font>
+end:   { offset: 25, line: 5, column: 8 }<font></font>
+}</code></pre>
+
+          <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">该</font></font><code>start</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">属性指的是表达式开头的位置，该</font></font><code>end</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">属性指的是表达式结尾之后的位置。</font><font style="vertical-align: inherit;">该</font></font><code>offset</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">属性包含偏移量作为从零开始的索引，</font></font><code>line</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">而</font></font><code>column</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            属性包含行和列作为从一开始的索引。</font></font></p>
+
+          <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">动作中的代码还可以使用该</font></font><code>options</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">变量</font><font style="vertical-align: inherit;">访问传递给解析器的选项</font><font style="vertical-align: inherit;">。</font></font></p>
+
+          <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">请注意，动作代码中的花括号必须保持平衡。</font></font></p>
+        </dd>
+
+        <dt><code><em>expression<sub>1</sub></em> / <em>expression<sub>2</sub></em> / ... /
+            <em>expression<sub>n</sub></em></code></dt>
+
+        <dd>
+          <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">尝试匹配第一个表达式，如果不成功，请尝试第二个，以此类推。返回第一个成功匹配的表达式的匹配结果。</font><font style="vertical-align: inherit;">如果没有表达式匹配，则认为匹配失败。</font></font></p>
+        </dd>
+      </dl>
+
+      <h2 id="compatibility"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">兼容性</font></font></h2>
+
+      <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">解析器生成器和生成的解析器在以下环境中均应运行良好：</font></font></p>
+
+      <ul>
+        <li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Node.js 0.10.0以上</font></font></li>
+        <li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Internet Explorer 8+</font></font></li>
+        <li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">边缘</font></font></li>
+        <li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">火狐浏览器</font></font></li>
+        <li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">铬</font></font></li>
+        <li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">苹果浏览器</font></font></li>
+        <li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">歌剧</font></font></li>
+      </ul>
+
+
+    </div>
+
+    <footer id="footer"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+      版权©2017+ </font></font><a href="https://futagoza.github.io/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Futago-za Ryuu</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+      •
+       </font></font><a href="https://github.com/pegjs/pegjs"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">源代码</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+      •
+       </font></font><a href="https://twitter.com/pegjs" title="在Twitter上关注PEG.js"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Twitter</font></font></a>
+      <br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+      版权©2010–2016 </font></font><a href="https://majda.cz/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">David Majda</font></font></a>
+    </footer>
+  </div>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r;
+      i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+      a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+      a.async = 1;
+      a.src = g;
+      m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+    ga('create', 'UA-100728112-1', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+</body>
+
+</html>

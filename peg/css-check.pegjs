@@ -1,65 +1,68 @@
-/**
- items = [
-  [
-    [ [], [] ],
-    "margin-top",
-    [],
-    ":",
-    [],
-    "72px",
-    [],
-    ";",
-    [ [], [] ]
-  ]
-]
- */
 StartRule
-    = EMPTYS'.'selector:(Word) EMPTYS '{' items:(ITEMS) '}'EMPTYS {
-        const arr = [];
+  = css:(CSS) {
+    const selectors = [];
 
-        items.forEach(x => {
-            arr.push({
-                property: x[1],
-                value: x[5]
-            });
+    css.forEach(sel => {
+      // console.log('sel');
+      // console.log(sel);
+
+      // sel[1] => .|#
+      // sel[2] => selector
+      // sel[5] => array[]
+      const obj = {
+        type: sel[1],
+        selector: sel[2],
+        items: []
+      };
+      sel[5].forEach(x => {
+        obj.items.push({
+          property: x[1],
+          value: x[5]
         });
+      });
 
-        return {
-            selector,
-            items: arr
-        };
-    }
+      selectors.push(obj);
+    });
+
+    return selectors;
+  }
 
 Word
-    = l:AlphaChars+ {
-        return l.join('');
-    }
+  = l:AlphaChars+ {
+    return l.join('');
+  }
 
 WordWithNumeric
-    = l:ALPHA_NUMERIC_CHARS+ {
-        return l.join('');
-    }
+  = l:ALPHA_NUMERIC_CHARS+ {
+    return l.join('');
+  }
 
 AlphaChars
-    = [a-zA-Z\_\-]
+  = [a-zA-Z0-9_-]
 
 ALPHA_NUMERIC_CHARS
-    = [a-zA-Z0-9]
+  = [#a-zA-Z0-9]
 
 WS "whitespace"
-    = [ \t]
+  = [ \t]
 
 WSS "whitespaces"
-    = WS*
+  = WS*
 
 LB "Linebreak"
-    = [\r\n]
+  = [\r\n]
 
 LBS "Linebreaks"
-    = LB*
+  = LB*
+
+TYPES
+  = [#|.]
 
 EMPTYS "空白字符合辑"
-    = LBS WSS
+  = LBS WSS
 
 ITEMS ""
-    = (EMPTYS property:(Word) WSS ':' WSS value:(WordWithNumeric) WSS ';' EMPTYS)+
+  = (EMPTYS property:(Word) WSS ':' WSS value:(WordWithNumeric) WSS ';' EMPTYS)*
+
+CSS
+  = (EMPTYS TYPES selector:(Word) EMPTYS '{' items:(ITEMS) '}'EMPTYS)*

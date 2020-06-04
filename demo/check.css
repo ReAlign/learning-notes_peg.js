@@ -1,1 +1,14 @@
-.g-inject-app{margin-top:72px;margin-bottom:12px;background:red;}
+#app {
+  position: relative;
+}
+
+.g-inject-app {
+        margin-top: 72px;
+  margin-bottom: 12px;
+  background:    red;
+  background-color: #aaa;
+}
+
+.f-fs12 {
+  font-size: 12px;
+}

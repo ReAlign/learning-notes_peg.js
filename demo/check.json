@@ -1,19 +1,46 @@
 {
-  "result": {
-    "selector": "g-inject-app",
-    "items": [
-      {
-        "property": "margin-top",
-        "value": "72px"
-      },
-      {
-        "property": "margin-bottom",
-        "value": "12px"
-      },
-      {
-        "property": "background",
-        "value": "red"
-      }
-    ]
-  }
+  "result": [
+    {
+      "type": "#",
+      "selector": "app",
+      "items": [
+        {
+          "property": "position",
+          "value": "relative"
+        }
+      ]
+    },
+    {
+      "type": ".",
+      "selector": "g-inject-app",
+      "items": [
+        {
+          "property": "margin-top",
+          "value": "72px"
+        },
+        {
+          "property": "margin-bottom",
+          "value": "12px"
+        },
+        {
+          "property": "background",
+          "value": "red"
+        },
+        {
+          "property": "background-color",
+          "value": "#aaa"
+        }
+      ]
+    },
+    {
+      "type": ".",
+      "selector": "f-fs12",
+      "items": [
+        {
+          "property": "font-size",
+          "value": "12px"
+        }
+      ]
+    }
+  ]
 }
