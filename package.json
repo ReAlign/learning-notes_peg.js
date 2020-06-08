@@ -20,7 +20,10 @@
     "css": "node demo/css.js",
     "bean": "node demo/bean.js",
     "compute": "node demo/compute.js",
-    "between": "node demo/between.js"
+    "between": "node demo/between.js",
+
+    "build-css-01": "pegjs -o demo/css/01/css-parser.js demo/css/01/css.pegjs",
+    "css-01": "node demo/css/01/css.js"
   },
   "repository": {
     "type": "git",
