@@ -4,23 +4,23 @@
   "description": "Learning Notes: PEG.js",
   "main": "index.js",
   "scripts": {
-    "build-check": "pegjs -o dist/css-check-parser.js peg/css-check.pegjs",
-    "minifier-check": "terser dist/css-check-parser.js --compress --mangle -o dist/css-check-parser.min.js",
-    "generate-check": "npm run build-check && npm run minifier-check",
-
+    "build-css": "pegjs -o dist/css-parser.js peg/css.pegjs",
+    "minifier-css": "terser dist/css-parser.js --compress --mangle -o dist/css-parser.min.js",
+    "generate-css": "npm run build-css && npm run minifier-css",
     "build-bean": "pegjs -o dist/java-bean-parser.js peg/java-bean.pegjs",
     "minifier-bean": "terser dist/java-bean-parser.js --compress --mangle -o dist/java-bean-parser.min.js",
     "generate-bean": "npm run build-bean && npm run minifier-bean",
-
     "build-compute": "pegjs -o dist/compute-parser.js peg/compute.pegjs",
     "minifier-compute": "terser dist/compute-parser.js --compress --mangle -o dist/compute-parser.min.js",
     "generate-compute": "npm run build-compute && npm run minifier-compute",
-
-    "generate": "npm run generate-check && npm run generate-bean && npm run generate-compute",
-
-    "check": "node demo/check.js",
+    "build-between": "pegjs -o dist/between-parser.js peg/between.pegjs",
+    "minifier-between": "terser dist/between-parser.js --compress --mangle -o dist/between-parser.min.js",
+    "generate-between": "npm run build-between && npm run minifier-between",
+    "generate": "npm run generate-css && npm run generate-bean && npm run generate-compute",
+    "css": "node demo/css.js",
     "bean": "node demo/bean.js",
-    "compute": "node demo/compute.js"
+    "compute": "node demo/compute.js",
+    "between": "node demo/between.js"
   },
   "repository": {
     "type": "git",

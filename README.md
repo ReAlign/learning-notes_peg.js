@@ -11,3 +11,4 @@
 * [PEG.js 介绍与基础使用](https://zhuanlan.zhihu.com/p/49833910)
 * [huntbao/jsonbean](https://github.com/huntbao/jsonbean)
 * [[Node.js] PEGjs](https://www.jianshu.com/p/e280a1a756fb)
+* [手写一个解析器-腾讯技术工程](https://mp.weixin.qq.com/s/VTULhAjEUNfAph-xkkUTsg)
